@@ -10,6 +10,7 @@
             $mensagem = array();
 
             Auth::checkLogin(); 
+            Auth::checkLoginAdmin();
 
             if(isset($_POST['cadastrar'])){
                 $nome = $_POST['nome'];

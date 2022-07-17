@@ -6,13 +6,14 @@
     
         public $titulo;
         public $texto;
+        public $imagem;
 
 
 
         //Consulta por toda tabela
         public function getAll(){
 
-            $sql = "SELECT * FROM notes";
+            $sql = "SELECT notes.id, notes.titulo, notes.texto, notes.imagem, users.nome FROM notes INNER JOIN users ON notes.id_user = users.id";
             $stmt = Model::getConn()->prepare($sql);
             $stmt->execute();
 
@@ -46,10 +47,11 @@
 
         //Gravar dados no BD
         public function save(){
-            $sql = "INSERT INTO notes (titulo, texto) VALUES (?, ?)";
+            $sql = "INSERT INTO notes (titulo, texto, imagem) VALUES (?, ?, ?)";
             $stmt = Model::getConn()->prepare($sql);
             $stmt->bindValue(1, $this->titulo);
             $stmt->bindValue(2, $this->texto);
+            $stmt->bindValue(3, $this->imagem);
             
             if($stmt->execute()){
                 return "<script>M.toast({html: 'Cadastrado com sucesso!'})</script>";
@@ -79,6 +81,20 @@
 
         //Deletar um registro
         public function delete($id){
+            
+            //Excluir a imagem
+            $sql = "SELECT imagem FROM notes WHERE id = $id";
+            $stmt = Model::getConn()->prepare($sql);
+            $stmt->bindValue('id', $id);
+            $stmt->execute();
+
+            $resultado = $stmt->fetch(PDO::FETCH_ASSOC);
+            
+            if(!empty($resultado['imagem'])){
+                unlink("uploads/".$resultado['imagem']);
+            }
+
+            //Deletar o registro
             $sql = "DELETE FROM notes WHERE id = ?";
             $stmt = Model::getConn()->prepare($sql);
             $stmt->bindValue(1, $id);
@@ -91,6 +107,9 @@
             
         }
      
+
+
+        //Procurar um registro por título
         public function search($search)
         {
             $sql = "SELECT * FROM notes WHERE titulo LIKE ? COLLATE utf8_general_ci";

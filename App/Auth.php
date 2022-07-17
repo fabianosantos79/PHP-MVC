@@ -16,6 +16,7 @@ use App\core\Model;
                     $_SESSION['logado'] = true;
                     $_SESSION['userId'] = $resultado['id'];
                     $_SESSION['userNome'] = $resultado['nome'];
+                    $_SESSION['userLevel'] = $resultado['level'];
                     header('Location: /home/index');
                 }else{
                     return "Senha inválida";
@@ -34,6 +35,13 @@ use App\core\Model;
         public static function checkLogin(){
             if(!isset($_SESSION['logado'])){
                 header('Location: /home/login');
+                die;
+            }
+        }
+
+        public static function checkLoginAdmin(){
+            if($_SESSION['userLevel'] != 2){
+                header('Location: /notes/criar');
                 die;
             }
         }

@@ -32,8 +32,10 @@
         <li><a href="/">Home</a></li>
 
         <?php if(isset($_SESSION['logado'])): ?>
+            <?php if($_SESSION['userLevel'] == 2): ?>
+              <li><a href="/users/cadastrar">Cadastrar Usuário</a></li>
+            <?php endif; ?>
             <li><a href="/notes/criar">Criar bloco</a></li>
-            <li><a href="/users/cadastrar">Cadastrar Usuário</a></li>
             <li class="black-text"><strong><em>Olá <?php echo $_SESSION['userNome']; ?></em></strong></li>
             <li>&nbsp;</li>
             <li>&nbsp;</li>
@@ -49,5 +51,9 @@
   </nav>
       
     <?php require_once '../App/views/'.$view.'.php'; ?>
+
+    <script>
+        M.AutoInit();
+    </script>
 </body>
 </html>
