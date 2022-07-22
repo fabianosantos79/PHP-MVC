@@ -56,7 +56,7 @@
             if($stmt->execute()){
                 return "<script>M.toast({html: 'Cadastrado com sucesso!'})</script>";
             }else{
-                return "<script>M.toast({html: 'Erro ao cadastrar'})</script>";
+                return "<script>M.toast({html: 'Erro ao cadastrar!'})</script>";
             }
         }
 
@@ -73,7 +73,7 @@
             if($stmt->execute()){
                 return "<script>M.toast({html: 'Atualizado com sucesso!'})</script>";
             }else{
-                return "<script>M.toast({html: 'Erro ao atualizar'})</script>";
+                return "<script>M.toast({html: 'Erro ao atualizar!'})</script>";
             }
         }
 
@@ -102,7 +102,7 @@
             if($stmt->execute()){
                 return "<script>M.toast({html: 'Excluído com sucesso!'})</script>";
             }else{
-                return "<script>M.toast({html: 'Erro ao excluir'})</script>";
+                return "<script>M.toast({html: 'Erro ao excluir!'})</script>";
             }
             
         }
