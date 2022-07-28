@@ -14,7 +14,7 @@
         <div class="row">
             <div class="input-field col s12">
             <input id="email" type="email" name="email" class="validate">
-            <label for="email">Email</label>
+            <label for="email">E-mail</label>
             </div>
         </div>
         <div class="row">
